@@ -1,0 +1,22 @@
+.addTitle {
+  text-align: center;
+  color: blue;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  background-color: rgb(248, 248, 248);
+  width: 400px;
+  margin: 30px auto;
+}
+
+.label {
+  margin-left: 25px;
+}
+
+.addbtn {
+  width: 100px;
+  height: 40px;
+  margin: 60px auto;
+  display: block;
+}

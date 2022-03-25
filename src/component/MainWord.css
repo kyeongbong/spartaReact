@@ -1,0 +1,68 @@
+.nav_bar {
+  background: rgb(0, 0, 0);
+  width: 100%;
+  display: flex;
+  color: white;
+  padding: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.Add_btn {
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: block;
+  background-color: rgb(51, 50, 48);
+  border-radius: 50px;
+  float: right;
+  margin-left: 80vw;
+}
+
+.Add_btn:hover {
+  color: black;
+  background-color: rgb(255, 253, 250);
+  border: 1px solid black;
+  border-radius: 50px;
+}
+
+.col-md-4 {
+  height: 160px;
+  width: 420px;
+  margin: 5px 5px 5px 5px;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.mainbox {
+  width: 396px;
+  float: left;
+}
+
+.eng {
+  margin: 5px 5px 5px 5px;
+  width: 250px;
+  float: left;
+}
+
+.imogibox {
+  width: 90px;
+  margin: 10px 0px 0px 320px;
+}
+
+.imogi {
+  width: 20px;
+  height: 20px;
+  margin: 30px 7px 5px 0px;
+}
+
+.kor {
+  margin: 5px;
+}
+
+.say {
+  color: blue;
+  margin: 5px;
+}
