@@ -15,8 +15,16 @@
 }
 
 .addbtn {
-  width: 100px;
+  width: 200px;
   height: 40px;
   margin: 60px auto;
   display: block;
+  background-color: black;
+  color: white;
+}
+
+.addbtn:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
 }

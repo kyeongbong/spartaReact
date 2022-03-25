@@ -1,10 +1,16 @@
 import React from "react";
 import "./AddWord.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// import { createword } from "./redux/modules/word"
 
 export default function AddWord() {
 
   const navigate = useNavigate();
+
+  // const addWordList = () => {
+  //   dispatch = useDispatch(createword(text.current.value));
+  // };
 
   return(
     <div className="body">
@@ -40,8 +46,7 @@ export default function AddWord() {
           <label for="floatingInput" className="label">해석을 입력해 주세요!</label>
         </div>
 
-        <button className="addbtn" onClick = {
-      () => {navigate( `/` )}}>추가하기</button>
+        <button className="addbtn" onClick = {() => {navigate( `/` )}}>추가하기</button>
 
         </div>
     </div>
