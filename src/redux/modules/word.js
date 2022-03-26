@@ -1,24 +1,31 @@
 // word.js
 
 // Actions
-
+// const LOAD = "word/LOAD";
 const CREATE = 'word/CREATE';
 //const UPDATE = 'my-app/widgets/UPDATE';
 //const REMOVE = 'my-app/widgets/REMOVE';
 
 const initialState = {
-  list: [
-    { 단어들 : 'apple', 뜻 : '사과', 응용영어 : 'I like apple', 응용한글 : '난 사과를 좋아한다'},
-    { 단어들 : 'bear', 뜻 : '곰', 응용영어 : 'bear is cute', 응용한글 : '곰은 귀엽다'},
-    { 단어들 : 'tomato', 뜻 : '토마토', 응용영어 : 'tomato nomat', 응용한글 : '토마토 노맛'},
-    { 단어들 : 'banana', 뜻 : '바나나', 응용영어 : 'banana ggulmat', 응용한글 : '바나나 꿀맛'}
+  list : [
+    (['apple', '사과', '냠냠', '꿀꺽']),
+    (['apple', '사과', '냠냠', 'dndpr'])
   ]
 }
 
+
 // Action Creators
+// export const loadword = (word) => {
+//   return { type: LOAD, word };
+// };
+
 export function createword(word) {
-  return {type: CREATE, word: word};
+  return {type: CREATE, word: word, };
 }
+
+// export const createword = (word) => {
+//   return { type: CREATE, word };
+// };
 
 //export function updateWidget(widget) {
 // return { type: UPDATE, widget };
@@ -29,13 +36,29 @@ export function createword(word) {
 //}
 
 // Reducer
+
 export default function reducer(state = initialState, action = {}) {
-switch (action.type) {
-  case "word/CREATE": {
-    const new_word_list = [...state.단어, action.word];
-    return { list : new_word_list };
+  switch (action.type) {
+    // do reducer stuff
+
+    case "word/CREATE":
+      {const new_word_list = [...state.list, action.word];
+      return { list: new_word_list };}
+
+    default:
+      return state;
   }
-// do reducer stuff
-default: return state;
 }
-}
+
+
+
+// export  function reducer(state = initialState, action = [{}]) {
+// switch (action.type) {
+//   case "word/CREATE": {
+//     const new_word_list = [...state.단어, action.word];
+//     return { list : new_word_list };
+//   }
+// // do reducer stuff
+// default: return state;
+// }
+// }

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "./MainWord.css"
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function MainWord() {
 
-  //let [ 단어, 단어변경 ] = useState(['apple', 'bear', 'tomato']);
+  // let [ 단어, 단어변경 ] = useState(['apple', 'bear', 'tomato']);
 
   //let [ 뜻, 뜻변경 ] = useState(['사과', '곰', '토마토']);
 
@@ -16,7 +16,6 @@ export default function MainWord() {
   const navigate = useNavigate();
 
   const data = useSelector( (state) => state.word.list );
-  console.log(data)
 
   return(
 
@@ -33,13 +32,14 @@ export default function MainWord() {
       <div className="container">
         <div className="row">
           {
-            data.map(function (i, a) {
+            data.map(function (a, i) {
+              console.log(a)
               return (
-              <div className="col-md-4" key={i}>
+              <div className="col-md-4" key={a}>
 
                 <div className="mainbox">
                   <h3 className="eng">
-                    { i.단어들 }
+                    { a[0] }
                   </h3>
                   <div className="imogibox">
                     <span className="imogi"> ✅ </span>
@@ -49,9 +49,9 @@ export default function MainWord() {
                     
                 </div>
 
-                <p className="kor">{ i.뜻 }</p>
-                <p className="say">응용 문장 : { i.응용영어 }</p>
-                <p className="say">응용 해석 : { i.응용한글 }</p>
+                <p className="kor">{ a[1] }</p>
+                <p className="say">응용 문장 : { a[2] }</p>
+                <p className="say">응용 해석 : { a[3] }</p>
 
               </div>
               )
