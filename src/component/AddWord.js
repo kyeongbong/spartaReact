@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import "./AddWord.css";
 import { useNavigate } from "react-router-dom";
@@ -5,11 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createword } from "../redux/modules/word"
 
+import {db} from "../firebase";
+import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
+
+import { loadword ,addwordFB } from "../redux/modules/word";
+
+
+
 export default function AddWord() {
 
   const navigate = useNavigate();
   
   const dispatch = useDispatch();
+
+  
   
   const text = React.useRef(null);
   const text1 = React.useRef(null);
@@ -18,13 +28,22 @@ export default function AddWord() {
   
   const addWordList = () => {
     
-    let eng = (text.current.value)
-    let kor = (text1.current.value)
-    let engs = (text2.current.value)
-    let kors = (text3.current.value)
+    let a = (text.current.value)
+    let b = (text1.current.value)
+    let c = (text2.current.value)
+    let d = (text3.current.value)
 
-    return dispatch (createword([eng, kor, engs, kors]));
+    // return dispatch (createword([eng, kor, engs, kors]));
+    dispatch(addwordFB({0: a, 1: b, 2: c, 3: d}));
   };
+
+  // React.useEffect( async () => {
+  //   console.log(db);
+    
+
+  //   addDoc(collection(db, "word"), { 0 : "2nd" , 1 : "2nd" , 2 : "2nd" , 3 : "2nd" });
+    
+  // }, [] )
 
 
   return(

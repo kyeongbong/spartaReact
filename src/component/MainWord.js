@@ -1,25 +1,43 @@
+/* eslint-disable */
 import React from "react";
 import "./MainWord.css"
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
+import {db} from "../firebase";
+import { 
+  collection, 
+  doc, 
+  getDoc, 
+  getDocs, 
+  addDoc, 
+  updateDoc, 
+  deleteDoc 
+} from "firebase/firestore";
+import { loadword ,loadwordFB } from "../redux/modules/word";
 
 export default function MainWord() {
 
   // let [ 단어, 단어변경 ] = useState(['apple', 'bear', 'tomato']);
-
   //let [ 뜻, 뜻변경 ] = useState(['사과', '곰', '토마토']);
-
   //let [ 응용영어, 응용영어변경 ] = useState(['I like apple', 'bear is cute', 'tomato nomat']);
-  
   //let [ 응용한글, 응용한글변경 ] = useState(['난 사과를 좋아한다', '곰은 귀엽다', '토마토 노맛']);
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
+  React.useEffect( () => {
+    dispatch(loadwordFB());
+  }, []);
+  
   const data = useSelector( (state) => state.word.list );
 
+
+
   return(
-
-
+    
     <div>
 
       <div className="nav_bar">
@@ -28,12 +46,11 @@ export default function MainWord() {
       () => {navigate( `/AddWord` )}}>+</button>
       </div>
 
-
       <div className="container">
         <div className="row">
           {
             data.map(function (a, i) {
-              console.log(a)
+              console.log( a )
               return (
               <div className="col-md-4" key={a}>
 
