@@ -11,13 +11,15 @@ import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
 
 import { loadword ,addwordFB } from "../redux/modules/word";
 
+import { Link } from "react-router-dom";
+
 
 
 export default function AddWord() {
 
   const navigate = useNavigate();
   
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
 
   
   
@@ -58,26 +60,29 @@ export default function AddWord() {
             backgroundColor: "white",
           }} >
 
-        <h2 className="addTitle">단어 추가하기</h2>
+        <h2 className="addTitle" onClick={()=>{navigate( `/` )}}>단어 추가하기</h2>
 
           <div>
-            <input type="text" className="form-control" ref={text}/>
+            <input type="text" className="form-control" ref={text} placeholder="영단어" />
           </div>
 
           <div>
-            <input type="text" className="form-control" ref={text1}/>
+            <input type="text" className="form-control" ref={text1} placeholder="해석" />
           </div>
 
           <div>
-            <input type="text" className="form-control" ref={text2}/>
+            <input type="text" className="form-control" ref={text2} placeholder="응용 문장" />
           </div>
 
           <div>
-            <input type="text" className="form-control" ref={text3}/>
+            <input type="text" className="form-control" ref={text3} placeholder="응용문장 해석" />
           </div>
 
-          <button className="addbtn" onClick = { addWordList }>추가하기</button>
-          <button className="addbtn" onClick = { () => {navigate( `/` )} }>돌아가기</button>
+          
+
+          <Link to = "/">
+            <button className="addbtn" onClick = { addWordList }>추가하기</button>
+          </Link>
 
         </div>
     </div>

@@ -10,12 +10,13 @@ import {
   updateDoc, 
   deleteDoc 
 } from "firebase/firestore";
+import { async } from "@firebase/util";
 
 // Actions
 const LOAD = "word/LOAD";
 const CREATE = 'word/CREATE';
 //const UPDATE = 'my-app/widgets/UPDATE';
-//const REMOVE = 'my-app/widgets/REMOVE';
+const REMOVE = 'word/REMOVE';
 
 const initialState = {
   list : []
@@ -32,17 +33,13 @@ export function createword(word) {
   return {type: CREATE, word: word, };
 }
 
-// export const createword = (word) => {
-//   return { type: CREATE, word };
-// };
-
 //export function updateWidget(widget) {
 // return { type: UPDATE, widget };
 //}
 
-//export function removeWidget(widget) {
-//  return { type: REMOVE, widget };
-//}
+export function deleteword(word) {
+  return { type: REMOVE, word };
+}
 
 //middlewares
 
@@ -54,9 +51,9 @@ export const loadwordFB = () => {
     let word_list  = [];
 
     word_data.forEach((b) => {
-      // console.log(b.id, b.data());
+      console.log(b.id); 
       word_list.push({ id: b.id, ...b.data() });
-    });
+    });  
 
     // console.log(word_list);
     dispatch(loadword(word_list));
@@ -65,14 +62,35 @@ export const loadwordFB = () => {
 
 export const addwordFB = (word) => {
   return async function (dispatch) {
-		// 파이어스토어에 추가하기를 기다려요!
     const docRef = await addDoc(collection(db, "word"), word);
-		// 추가한 데이터 중 id를 가져와서 bucket_data를 만들어줬어요!
     const word_data = { id: docRef.id, ...word };
-		// 그럼 이제 액션을 일으키자! (수정해달라고 요청하자!)
+
+    console.log(docRef);
+
     dispatch(createword(word_data));
   }
 }
+
+// 파이어베이스랑 통신하는 부분
+export const deletewordFB = (word_id) => {
+  return async function (dispatch, getState) {
+    if(!word_id){
+      window.alert("아이디가 없네요!");
+      return;
+    }
+    const docRef = doc(db, "word", word_id);
+    await deleteDoc(docRef);
+
+    const _word_list = getState().word.list;
+    const word_index = _word_list.findIndex((b) => {
+      return b.id === word_id;
+      
+    });
+    
+    dispatch(deleteword(word_index));
+  }
+}
+console.log('dddd')
 
 // Reducer
 
@@ -84,9 +102,9 @@ export default function reducer(state = initialState, action = {}) {
       return {list: action.word_list}
     }
 
-    case "word/CREATE":
-      {const new_word_list = [...state.list, action.word];
-      return { list: new_word_list };}
+    // case "word/CREATE":
+    //   {const new_word_list = [...state.list, action.word];
+    //   return { list: new_word_list };}
 
     default:
       return state;

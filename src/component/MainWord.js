@@ -4,6 +4,7 @@ import "./MainWord.css"
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useState } from "react";
 
 import {db} from "../firebase";
 import { 
@@ -15,14 +16,9 @@ import {
   updateDoc, 
   deleteDoc 
 } from "firebase/firestore";
-import { loadword ,loadwordFB } from "../redux/modules/word";
+import { loadword, Deleteword, loadwordFB ,deletewordFB} from "../redux/modules/word";
 
 export default function MainWord() {
-
-  // let [ 단어, 단어변경 ] = useState(['apple', 'bear', 'tomato']);
-  //let [ 뜻, 뜻변경 ] = useState(['사과', '곰', '토마토']);
-  //let [ 응용영어, 응용영어변경 ] = useState(['I like apple', 'bear is cute', 'tomato nomat']);
-  //let [ 응용한글, 응용한글변경 ] = useState(['난 사과를 좋아한다', '곰은 귀엽다', '토마토 노맛']);
 
   const navigate = useNavigate();
 
@@ -31,10 +27,25 @@ export default function MainWord() {
   React.useEffect( () => {
     dispatch(loadwordFB());
   }, []);
+
+  
   
   const data = useSelector( (state) => state.word.list );
+  
+  React.useEffect(async() => {
+    const docRef = doc(db, "word", "word_id");
+    await deleteDoc(docRef);
+    console.log(a.id)
 
+  }, []);
 
+  let [modal, modal변경] = useState(false);
+
+    { modal === true ? console.log(1) : console.log(2) }
+
+  function reload1() {
+    return window.location.replace("/")
+  }
 
   return(
     
@@ -50,7 +61,7 @@ export default function MainWord() {
         <div className="row">
           {
             data.map(function (a, i) {
-              console.log( a )
+              console.log( a.id )
               return (
               <div className="col-md-4" key={a}>
 
@@ -59,9 +70,13 @@ export default function MainWord() {
                     { a[0] }
                   </h3>
                   <div className="imogibox">
-                    <span className="imogi"> ✅ </span>
-                    <span className="imogi">✍️</span>
-                    <span className="imogi">🗑</span>
+                    <span className="imogi" onClick={ ()=>{ modal변경(!modal) } }> ✅ </span>
+                    <span className="imogi" onClick={()=>{
+                      window.alert("오류안나게 해주세요.....")
+                    }}>🛐</span>
+                    <span className="imogi" onClick={() => {
+                      dispatch(deletewordFB(a.id), window.location.replace("/"));                                            
+                      }}>🗑</span>
                   </div>
                     
                 </div>
