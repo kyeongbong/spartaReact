@@ -15,7 +15,6 @@ import { async } from "@firebase/util";
 // Actions
 const LOAD = "word/LOAD";
 const CREATE = 'word/CREATE';
-//const UPDATE = 'my-app/widgets/UPDATE';
 const REMOVE = 'word/REMOVE';
 
 const initialState = {
@@ -33,10 +32,6 @@ export function createword(word) {
   return {type: CREATE, word: word, };
 }
 
-//export function updateWidget(widget) {
-// return { type: UPDATE, widget };
-//}
-
 export function deleteword(word) {
   return { type: REMOVE, word };
 }
@@ -51,11 +46,9 @@ export const loadwordFB = () => {
     let word_list  = [];
 
     word_data.forEach((b) => {
-      console.log(b.id); 
       word_list.push({ id: b.id, ...b.data() });
     });  
 
-    // console.log(word_list);
     dispatch(loadword(word_list));
   }
 }
@@ -64,8 +57,6 @@ export const addwordFB = (word) => {
   return async function (dispatch) {
     const docRef = await addDoc(collection(db, "word"), word);
     const word_data = { id: docRef.id, ...word };
-
-    console.log(docRef);
 
     dispatch(createword(word_data));
   }
@@ -102,24 +93,8 @@ export default function reducer(state = initialState, action = {}) {
       return {list: action.word_list}
     }
 
-    // case "word/CREATE":
-    //   {const new_word_list = [...state.list, action.word];
-    //   return { list: new_word_list };}
-
     default:
       return state;
   }
 }
 
-
-
-// export  function reducer(state = initialState, action = [{}]) {
-// switch (action.type) {
-//   case "word/CREATE": {
-//     const new_word_list = [...state.단어, action.word];
-//     return { list : new_word_list };
-//   }
-// // do reducer stuff
-// default: return state;
-// }
-// }

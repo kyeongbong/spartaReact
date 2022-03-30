@@ -35,7 +35,6 @@ export default function MainWord() {
   React.useEffect(async() => {
     const docRef = doc(db, "word", "word_id");
     await deleteDoc(docRef);
-    console.log(a.id)
 
   }, []);
 
@@ -70,10 +69,7 @@ export default function MainWord() {
                     { a[0] }
                   </h3>
                   <div className="imogibox">
-                    <span className="imogi" onClick={ ()=>{ modal변경(!modal) } }> ✅ </span>
-                    <span className="imogi" onClick={()=>{
-                      window.alert("오류안나게 해주세요.....")
-                    }}>🛐</span>
+
                     <span className="imogi" onClick={() => {
                       dispatch(deletewordFB(a.id), window.location.replace("/"));                                            
                       }}>🗑</span>

@@ -35,18 +35,8 @@ export default function AddWord() {
     let c = (text2.current.value)
     let d = (text3.current.value)
 
-    // return dispatch (createword([eng, kor, engs, kors]));
     dispatch(addwordFB({0: a, 1: b, 2: c, 3: d}));
   };
-
-  // React.useEffect( async () => {
-  //   console.log(db);
-    
-
-  //   addDoc(collection(db, "word"), { 0 : "2nd" , 1 : "2nd" , 2 : "2nd" , 3 : "2nd" });
-    
-  // }, [] )
-
 
   return(
     <div className="body">
